@@ -20,7 +20,7 @@ gameDisplay = pg.display.set_mode((display_width, display_height))
 pg.display.set_caption("Car Racing")
 
 # set icon
-icon = pg.image.load('./images/car.png')
+icon = pg.image.load('../resources/car.png')
 pg.display.set_icon(icon)  # size is 32x32
 
 # intialize frames per second
@@ -33,7 +33,7 @@ small_font = pg.font.SysFont("comicsansms", 25)
 med_font = pg.font.SysFont("comicsansms", 50)
 large_font = pg.font.SysFont("comicsansms", 75)
 
-car_img = pg.image.load("./images/car.png")
+car_img = pg.image.load("../resources/car.png")
 car_width = 60
 
 
