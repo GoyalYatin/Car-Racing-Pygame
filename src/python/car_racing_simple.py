@@ -1,10 +1,10 @@
 import pygame as pg
 import random
 
+# Initialize pygame
 pg.init()
 
-# crash_sound = pg.mixer.Sound("crash.wav")
-
+# Colors
 white = (255, 255, 255)
 black = (0, 0, 0)
 red = (155, 0, 0)
@@ -12,14 +12,17 @@ green = (0, 155, 0)
 bright_red = (255, 0, 0)
 bright_green = (0, 255, 0)
 
+# Display config
 display_width = 800
 display_height = 600
+
 # define surface as gameDisplay
 gameDisplay = pg.display.set_mode((display_width, display_height))
+
 # set title of the game window
 pg.display.set_caption("Car Racing")
 
-# set icon
+# Load and set icon
 icon = pg.image.load('../resources/car.png')
 pg.display.set_icon(icon)  # size is 32x32
 
@@ -29,15 +32,20 @@ clock = pg.time.Clock()
 FPS = 60
 pause = False
 
+# Fonts
 small_font = pg.font.SysFont("comicsansms", 25)
 med_font = pg.font.SysFont("comicsansms", 50)
 large_font = pg.font.SysFont("comicsansms", 75)
 
+# Load image
 car_img = pg.image.load("../resources/car.png")
 car_width = 60
 
 
 def button(msg, x, y, w, h, ic, ac, action=None):
+    """
+    Buttons and mouse movement,action
+    """
     mouse = pg.mouse.get_pos()
     click = pg.mouse.get_pressed()
 
@@ -47,8 +55,7 @@ def button(msg, x, y, w, h, ic, ac, action=None):
             action()         
     else:
         pg.draw.rect(gameDisplay, ic, (x, y, w, h))
-    smallText = pg.font.SysFont("comicsansms", 20)
-    textSurf, textRect = text_objects(msg, smallText)
+    textSurf, textRect = text_objects(msg, small_font)
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     gameDisplay.blit(textSurf, textRect)
 
@@ -66,8 +73,7 @@ def game_intro():
                 quit()
 
         gameDisplay.fill(white)
-        largeText = pg.font.SysFont("comicsansms", 115)
-        TextSurf, TextRect = text_objects("Car Race", largeText)
+        TextSurf, TextRect = text_objects("Car Race", large_font)
         TextRect.center = ((display_width / 2), (display_height / 2))
         gameDisplay.blit(TextSurf, TextRect)
 
@@ -79,20 +85,26 @@ def game_intro():
 
 
 def quit_game():
+    """
+    Quit the game
+    """
     pg.quit()
     quit()
 
 
 def unpause():
+    """
+    Unpause the game
+    """
     global pause
-    # pg.mixer.music.unpause()
     pause = False
 
 
 def paused():
-    # pg.mixer.music.pause()
-    largeText = pg.font.SysFont("comicsansms",115)
-    TextSurf, TextRect = text_objects("Paused", largeText)
+    """
+    Pause the game
+    """
+    TextSurf, TextRect = text_objects("Paused", large_font)
     TextRect.center = ((display_width/2),(display_height/2))
     gameDisplay.blit(TextSurf, TextRect)
 
@@ -110,10 +122,10 @@ def paused():
 
 
 def crash():
-    # pg.mixer.Sound.play(crash_sound)
-    # pg.mixer.music.stop()
-    largeText = pg.font.SysFont("comicsansms", 115)
-    TextSurf, TextRect = text_objects("You Crashed", largeText)
+    """
+    Logic to define crashing of car
+    """
+    TextSurf, TextRect = text_objects("You Crashed", large_font)
     TextRect.center = ((display_width / 2), (display_height / 2))
     gameDisplay.blit(TextSurf, TextRect)
     while True:
